@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1</title>
+</head>
+    <script>
+        async function generateRandomArray() {
+            let height = [];
+            let nums = [];
+            for (let i = 0; i < 10; i++) {
+                height.push(Math.floor(Math.random() * 10));
+                nums.push(height[i])
+            }
+        
+            var n=10;
+            var nh = new Array(10);
+            var ph = new Array(10);
+            
+            ph[0]=height[0];
+            nh[n-1]=height[n-1];
+            var mx= -10000;
+            var mn= -10000;
+            for(var i=1;i<n;i++){
+                if(height[i]>ph[i-1]){
+                    ph[i]=height[i];
+                }
+                else{
+                    ph[i]=ph[i-1];
+                }
+            }
+            
+            for(var i=n-2;i>=0;i--){
+                if(height[i]>nh[i+1]){
+                    nh[i]=height[i];
+                }
+                else{
+                    nh[i]=nh[i+1];
+                }
+            }
+
+            var wt=0;
+            var vals = []
+            for(var i=0;i<=n-1;i++){
+                vals.push(Math.min(ph[i],nh[i]) - height[i]);
+                wt += Math.min(ph[i],nh[i]) - height[i];
+            }
+    
+            var ans = new Array(10) ;
+            for (let i = 0; i < 10; i++) {
+                ans[i] = new Array(10);
+            }
+    
+            for(var i=0;i<10;i++){
+                var j=9;
+                while(height[i]>0){
+                    ans[j][i]=1;
+                    j--;
+                    height[i]--;
+                }
+                while(vals[i]>0){
+                    ans[j][i]=2;
+                    j--;
+                    vals[i]--;
+                }
+            }
+            document.write("<br>");
+            for(var i=0;i<10;i++){
+                for(var j=0;j<10;j++){
+                    if(ans[i][j]==1)
+                        document.write("<span style=\"background-color:rgb(212, 255, 0);padding: 15px;width: 50px;border: 1px solid black\"></span>");    
+                    else if(ans[i][j]==2)
+                        document.write("<span style=\"background-color:rgb(0, 119, 255);padding: 15px;width: 50px;border: 1px solid black\"></span>");    
+                    else
+                        document.write("<span style=\"background-color:rgb(173, 173, 173);padding: 15px;width: 50px;border: 1px solid black\"></span>");    
+                }
+                document.write("<br>");
+            }
+            
+            document.write("<br><br><br> The Sample arrray was = > ");
+            for(var i=0;i<10;i++){
+                document.write(nums[i]);
+                document.write(" ");
+            }
+            document.write("<br> The water collected was = > " + wt + " units");
+            document.write("<br><br>");
+            document.write("<br><br>");
+
+            for(var i=0;i<10;i++){
+                for(var j=0;j<10;j++){
+                    if(ans[i][j]==2)
+                        document.write("<span style=\"background-color:rgb(0, 119, 255);padding: 15px;width: 50px;border: 1px solid black\"></span>");    
+                    else
+                        document.write("<span style=\"background-color:rgb(173, 173, 173);padding: 15px;width: 50px;border: 1px solid black\"></span>");    
+                }
+                document.write("<br>");
+            }
+        }
+    </script>
+<body>
+    <button onclick="generateRandomArray()">Generate Random Array</button>
+</body>
+</html>
