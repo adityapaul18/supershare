@@ -43,17 +43,23 @@ void soln(ll t, ll c, vector<vector<ll>> &ans,ll th,ll p ,ll h){
 }
 
 void answer(){
-    ll t,c;
+    ll t,c=0,tn=0;
     cin>>t;
 
     vector<vector<ll>> ans;
 
+    while(t>10){
+        c+=(t-5)*1500;
+        t-=5;
+        tn++;
+    }
+
     get(t,0,ans,0,0,0);
     soln(t,0,ans,0,0,0);
 
-    cout<<"Earnings : "<<a<<" \n";
+    cout<<"Earnings : "<<a+c<<" \n";
     for(auto k : ans){
-        cout<<"T : "<<k[0]<<" "<<"P : "<<k[1]<<" "<<"C : "<<k[2]<<" \n";
+        cout<<"T : "<<k[0]+tn<<" "<<"P : "<<k[1]<<" "<<"C : "<<k[2]<<" \n";
     }
     
 }
